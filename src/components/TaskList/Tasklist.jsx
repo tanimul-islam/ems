@@ -1,6 +1,6 @@
 import React from "react";
 
-const Tasklist = ({ tasks }) => {
+const Tasklist = ({ tasks, updateTaskStatus }) => {
   if (!tasks || tasks.length === 0) {
     return <p className="text-gray-400 text-center mt-5">No tasks assigned.</p>;
   }
@@ -14,7 +14,11 @@ const Tasklist = ({ tasks }) => {
         <article
           key={index}
           className={`h-full w-[300px] ${
-            task.completed ? "bg-green-200" : "bg-red-200"
+            task.completed
+              ? "bg-green-200"
+              : task.failed
+              ? "bg-red-200"
+              : "bg-yellow-200"
           } rounded-xl flex-shrink-0 p-5`}
         >
           <div className="flex justify-between items-center font-semibold">
@@ -35,11 +39,32 @@ const Tasklist = ({ tasks }) => {
           <p className="text-sm text-gray-700 mt-2">{task.description}</p>
           <p
             className={`text-sm font-bold mt-2 ${
-              task.completed ? "text-green-700" : "text-red-700"
+              task.completed
+                ? "text-green-700"
+                : task.failed
+                ? "text-red-700"
+                : "text-yellow-700"
             }`}
           >
-            {task.completed ? "Completed" : "Pending"}
+            {task.completed ? "Completed" : task.failed ? "Failed" : "Pending"}
           </p>
+
+          {!task.completed && !task.failed && (
+            <div className="mt-3 flex gap-2">
+              <button
+                className="bg-green-500 text-white px-3 py-1 rounded"
+                onClick={() => updateTaskStatus(index, "completed")}
+              >
+                Complete
+              </button>
+              <button
+                className="bg-red-500 text-white px-3 py-1 rounded"
+                onClick={() => updateTaskStatus(index, "failed")}
+              >
+                Fail
+              </button>
+            </div>
+          )}
         </article>
       ))}
     </div>

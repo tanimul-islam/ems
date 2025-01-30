@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from "react";
 import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
