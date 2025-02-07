@@ -302,18 +302,32 @@ export const setLocalStorage = () => {
   if (!localStorage.getItem("Employees")) {
     localStorage.setItem("Employees", JSON.stringify(employees));
   }
-
   if (!localStorage.getItem("Admin")) {
     localStorage.setItem("Admin", JSON.stringify(admin));
   }
 };
 
 export const getLocalStorage = () => {
-  const employeesData = localStorage.getItem("Employees");
-  const adminData = localStorage.getItem("Admin");
+  try {
+    const employeesData = localStorage.getItem("Employees");
+    const adminData = localStorage.getItem("Admin");
 
-  return {
-    employees: employeesData ? JSON.parse(employeesData) : [],
-    admin: adminData ? JSON.parse(adminData) : null,
-  };
+    return {
+      employees: employeesData ? JSON.parse(employeesData) : employees,
+      admin: adminData ? JSON.parse(adminData) : admin,
+    };
+  } catch (error) {
+    console.error("Error retrieving local storage data:", error);
+    return { employees, admin };
+  }
+};
+
+export const updateEmployeeTasks = (email, updatedTasks) => {
+  const { employees } = getLocalStorage();
+
+  const updatedEmployees = employees.map((employee) =>
+    employee.email === email ? { ...employee, tasks: updatedTasks } : employee
+  );
+
+  localStorage.setItem("Employees", JSON.stringify(updatedEmployees));
 };

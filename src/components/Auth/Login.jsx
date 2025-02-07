@@ -24,40 +24,51 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen">
-      <div className="border-2 border-emerald-600 p-20 rounded-xl">
-        <form
-          onSubmit={(e) => {
-            submitHandler(e);
-          }}
-          className="flex flex-col items-center justify-center"
-        >
-          <input
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
+    <div className="h-screen w-screen flex flex-col justify-center items-center">
+      <div className="flex justify-center items-center ">
+        <div className="border-2 border-emerald-600 p-20 rounded-xl">
+          <form
+            onSubmit={(e) => {
+              submitHandler(e);
             }}
-            required
-            className="border-2 border-emerald-600 rounded-xl px-5 py-3 mt-5 text-xl text-white outline-none bg-transparent placeholder:text-gray-400"
-            type="text"
-            placeholder="Enter Your Email"
-          />
+            className="flex flex-col items-center justify-center"
+          >
+            <input
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+              className="border-2 border-emerald-600 rounded-xl px-5 py-3 mt-5 text-xl text-white outline-none bg-transparent placeholder:text-gray-400"
+              type="text"
+              placeholder="Enter Your Email"
+            />
 
-          <input
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-            className="border-2 border-emerald-600 rounded-xl px-5 py-3 mt-5 text-xl text-white outline-none bg-transparent placeholder:text-gray-400"
-            type="password"
-            placeholder="Enter Your Password"
-          />
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+              className="border-2 border-emerald-600 rounded-xl px-5 py-3 mt-5 text-xl text-white outline-none bg-transparent placeholder:text-gray-400"
+              type="password"
+              placeholder="Enter Your Password"
+            />
 
-          <button className="  text-white p-2 rounded-xl px-5 py-2 mt-5 bg-red-600">
-            Login
-          </button>
-        </form>
+            <button className="  text-white p-2 rounded-xl px-5 py-2 mt-5 bg-red-600">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center mt-4">
+        <h1 className="text-lg font-semibold">
+          Admin Access: admin@example.com password: 1234
+        </h1>
+        <h1 className="text-lg font-semibold">
+          Employee Access: johnedoe@example.com password: 1234
+        </h1>
       </div>
     </div>
   );
